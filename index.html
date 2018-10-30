@@ -125,7 +125,7 @@
         color: turquoise;
     }
     #formDiv{
-        font-family: 'Cutiv Mono';
+        font-family: 'Cutive Mono';
         font-size: 25px;
         position: absolute;
         left: 20%;
@@ -165,6 +165,24 @@
     .label{
         margin: 5px;
     }
+    #removalDiv{
+        font-family: 'Cutive Mono';
+        font-size: 25px;
+        position: absolute;
+        left: 20%;
+        top: 10%;
+        z-index: 2;
+        width: 60%;
+        background-color: rgba(250, 250, 250, .9);
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 20px;
+        display: none;
+    }
+    .removable{
+        cursor: pointer;
+        text-decoration: underline;
+    }
     </style>
 </head>
 
@@ -179,6 +197,9 @@
         </div>
         <div class="menuItem" onclick="showForm()">
             Add Station
+        </div>
+        <div class="menuItem" onclick="removalForm()">
+            Remove Station
         </div>
     </div>
     <h1 id="relax">Relax</h1>
@@ -197,16 +218,12 @@
     <div id="videoDiv">
         <video src="lighthouse.mp4" id="background" type="video/mp4" autoplay="true" loop="true" muted='true'></video>
 
-        <!-- <button onclick="next()">Next Station</button>
-    <button onclick="playLofi()">lofi</button>
-    <button id="jazzButton" onclick="playJazz()">jazz</button>
-    <button onclick="playCartoons()">cartoons</button> -->
     </div>
     <div id="player"></div>
     
     <div id="formDiv">
         <p>
-            Add the Video ID of a YouTube video which you would like to listen to, a title, and a genre of your choosing, and your browser will remember the information via cookies for 1000 days! IMPORTANT: the video id is an 11 digit code found in youTube URLs, following 'v=' and (possibly) preceding '&'. E.g., https://www.youtube.com/watch?v=<span class='red'>oHg5SJYRHA0</span>&t=1m1s 
+            Add the Video ID of a YouTube video which you would like to listen to, a title, and a genre of your choosing, and your browser will remember the information via cookies for 10,000 days! IMPORTANT: the video id is an 11 digit code found in youTube URLs, following 'v=' and (possibly) preceding '&'. E.g., https://www.youtube.com/watch?v=<span class='red'>oHg5SJYRHA0</span>&t=1m1s 
         </p>
         <hr>
         <p class='label'>Video ID</p>
@@ -221,6 +238,15 @@
         <button onclick="submitForm()">submit</button>
         <button onclick="hideForm()">cancel</button>
     </div>
+    
+    <div id="removalDiv">
+        <p>These are the stations you have added. Click on a station to delete it</p>
+        <hr>
+        <ul id="list">
+        </ul>
+        <button onclick="refresh()">Done</button>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

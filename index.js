@@ -33,6 +33,19 @@ let stations = [
     ['2L9vFNMvIBE', '24/7 Smooth Beats Radio', 'lofi']
 ]
 function readCookies(){
+    stations = [
+        ['NsB2eya4nFA', "Night of Smooth Jazz Radio", 'jazz'],
+        ['rNg90PU7Y1s', 'Autumn Jazz Radio', 'jazz'],
+        ['2ccaHpy5Ewo', 'Relaxing Jazz and Bossa Nova Radio', 'jazz'],
+        ['zab985qDgnU', 'Relaxing Rainy Jazz Radio', 'jazz'],
+        ['oQg4VCw24Qo', 'Morning Jazz and Bossa Nova Radio', 'jazz'],
+        ['GsE5nhj-nm4', 'Morning Coffee Jazz and Bossa Nova', 'jazz'],
+        ['hHW1oY26kxQ', 'Lofi Hip Hop Radio', 'lofi'],
+        ['vFtX7iqnKUk', 'Lofi Hip Hop Radio for Study', 'lofi'],
+        ['5AEbq6X33A8', '24/7 Lofi Hip Hop Radio', 'lofi'],
+        ['c_IVcbEez8o', 'Lofi Hip Hop for Sleep Radio', 'lofi'],
+        ['2L9vFNMvIBE', '24/7 Smooth Beats Radio', 'lofi']
+    ]
     let cookies = Cookies.get();
     for (let cookie in cookies){
         stations.push(JSON.parse(cookies[cookie]));
@@ -40,6 +53,7 @@ function readCookies(){
 }
 readCookies()
 function sortStations(){
+    genres = {}
     for (let i = 0; i < stations.length; i++){
         if (genres[stations[i][2]] == undefined){
             genres[stations[i][2]] = [];
@@ -50,6 +64,7 @@ function sortStations(){
 sortStations();
 
 function makeGenreNamesArray(){
+    genreNamesArray = []
     for (key in genres){
         if (!genreNamesArray[key]){
             genreNamesArray.push(key)
@@ -248,16 +263,47 @@ function submitForm(){
     
     hideForm();
 
-    Cookies.set(array[1], array, { expires: 1000 });
+    Cookies.set(array[1], array, { expires: 10000 });
     
-    // readCookies();
-    // sortStations();
-    // makeGenreNamesArray();
-    // setGenre();
-    // showNowPlaying();
-    window.location.reload(false)
+    readCookies();
+    sortStations();
+    makeGenreNamesArray();
+    setGenre();
+    showNowPlaying();
+  
 }
 function showGenre(){
     document.getElementById('genreDisplay').textContent = genreNamesArray[k] + ' ' + (i + 1) + '/' + genre.length
 }
 showGenre()
+
+function removalForm(){
+    document.getElementById('removalDiv').style.display = 'block';
+    let cookies = Cookies.get();
+    for (let cookie in cookies){
+        let array = JSON.parse(cookies[cookie])
+        let item = document.createElement('li')
+        item.textContent = array[1]
+        item.setAttribute('class', 'removable')
+        item.setAttribute('onclick', 'removeItem(this)')
+        document.getElementById('list').appendChild(item)
+    }
+}
+
+function removeItem(target){
+Cookies.remove(target.textContent)
+target.style.textDecoration = 'line-through'
+}
+
+function refresh(){
+    document.getElementById('removalDiv').style.display = 'none';
+    readCookies();
+    sortStations();
+    makeGenreNamesArray();
+    setGenre();
+    showNowPlaying();
+    let stationNames = document.getElementsByClassName('removable')
+    for (let i = 0; i < stationNames.length; i++){
+        document.getElementById('list').removeChild(stationNames[i])
+    }
+}
