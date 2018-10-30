@@ -162,6 +162,9 @@
     .red{
         color: red;
     }
+    .label{
+        margin: 5px;
+    }
     </style>
 </head>
 
@@ -203,16 +206,16 @@
     
     <div id="formDiv">
         <p>
-            Add the Video ID of a YouTube video which you would like to listen to, a title, and a genre of your choosing, and your browser will remember the information via cookies for 1000 days! IMPORTANT: the video id is found in the url, following 'v=' and (possibly) preceding '&'. E.g., https://www.youtube.com/watch?v=<span class='red'>oHg5SJYRHA0</span>&t=1m1s 
+            Add the Video ID of a YouTube video which you would like to listen to, a title, and a genre of your choosing, and your browser will remember the information via cookies for 1000 days! IMPORTANT: the video id is an 11 digit code found in youTube URLs, following 'v=' and (possibly) preceding '&'. E.g., https://www.youtube.com/watch?v=<span class='red'>oHg5SJYRHA0</span>&t=1m1s 
         </p>
         <hr>
-        <p>Video ID</p>
+        <p class='label'>Video ID</p>
         <input id="url" type='text'>
         <br>
-        <p>Title</p>
+        <p class='label'>Title</p>
         <input id="title" type='text'>
         <br>
-        <p>Genre</p>
+        <p class='label'>Genre</p>
         <input id="genre" type='text'>
         <br>
         <button onclick="submitForm()">submit</button>

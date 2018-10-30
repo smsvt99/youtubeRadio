@@ -250,11 +250,12 @@ function submitForm(){
 
     Cookies.set(array[1], array, { expires: 1000 });
     
-    readCookies();
-    sortStations();
-    makeGenreNamesArray();
-    setGenre();
-    showNowPlaying();
+    // readCookies();
+    // sortStations();
+    // makeGenreNamesArray();
+    // setGenre();
+    // showNowPlaying();
+    window.location.reload(false)
 }
 function showGenre(){
     document.getElementById('genreDisplay').textContent = genreNamesArray[k] + ' ' + (i + 1) + '/' + genre.length
