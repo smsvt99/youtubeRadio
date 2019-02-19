@@ -17,7 +17,7 @@ let interval;
 // let jazz = ['NsB2eya4nFA', 'rNg90PU7Y1s', '2ccaHpy5Ewo', 'zab985qDgnU', 'oQg4VCw24Qo']
 // let lofi = ['hHW1oY26kxQ','vFtX7iqnKUk','5AEbq6X33A8','c_IVcbEez8o','2L9vFNMvIBE']
 // let cartoons = ['01ecIQdpjWk','1FUjJzJ4V-I','itX0a6-OVpk','6bRO7nFroYc']
-let themes = ['lighthouse.mp4','turntable.mp4', 'river.mp4', 'grass.mp4', 'camp.mp4', 'lakeTahoe.mp4' ]
+let themes = ['lighthouse.mp4', 'grass.mp4', 'lakeTahoe.mp4', 'turntable.mp4', 'river.mp4',  'camp.mp4']
 
 let stations = [
     ['hHW1oY26kxQ', 'Lofi Hip Hop Radio', 'lofi'],
