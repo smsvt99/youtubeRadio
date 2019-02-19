@@ -20,9 +20,9 @@ let interval;
 let themes = ['lighthouse.mp4','turntable.mp4', 'city.webm', 'river.mp4', 'grass.mp4', 'camp.mp4', ]
 
 let stations = [
+    ['DSGyEsJ17cI', 'Relaxing Jazz and Bossa Nova Radio', 'jazz'],
     ['NsB2eya4nFA', "Night of Smooth Jazz Radio", 'jazz'],
     ['rNg90PU7Y1s', 'Autumn Jazz Radio', 'jazz'],
-    ['2ccaHpy5Ewo', 'Relaxing Jazz and Bossa Nova Radio', 'jazz'],
     ['zab985qDgnU', 'Relaxing Rainy Jazz Radio', 'jazz'],
     ['oQg4VCw24Qo', 'Morning Jazz and Bossa Nova Radio', 'jazz'],
     ['GsE5nhj-nm4', 'Morning Coffee Jazz and Bossa Nova', 'jazz'],
