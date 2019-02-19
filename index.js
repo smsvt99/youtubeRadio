@@ -6,7 +6,7 @@ let j = 0
 let k = 0
 
 let playing = true;
-let hidden;
+let hidden = false;
 let genre;
 let genreNamesArray = [];
 let genres = {}
@@ -20,48 +20,70 @@ let interval;
 let themes = ['lighthouse.mp4','turntable.mp4', 'city.webm', 'river.mp4', 'grass.mp4', 'camp.mp4', ]
 
 let stations = [
-    ['DSGyEsJ17cI', 'Relaxing Jazz and Bossa Nova Radio', 'jazz'],
-    ['NsB2eya4nFA', "Night of Smooth Jazz Radio", 'jazz'],
-    ['rNg90PU7Y1s', 'Autumn Jazz Radio', 'jazz'],
-    ['zab985qDgnU', 'Relaxing Rainy Jazz Radio', 'jazz'],
-    ['oQg4VCw24Qo', 'Morning Jazz and Bossa Nova Radio', 'jazz'],
-    ['GsE5nhj-nm4', 'Morning Coffee Jazz and Bossa Nova', 'jazz'],
     ['hHW1oY26kxQ', 'Lofi Hip Hop Radio', 'lofi'],
-    ['vFtX7iqnKUk', 'Lofi Hip Hop Radio for Study', 'lofi'],
-    ['5AEbq6X33A8', '24/7 Lofi Hip Hop Radio', 'lofi'],
-    ['c_IVcbEez8o', 'Lofi Hip Hop for Sleep Radio', 'lofi'],
-    ['2L9vFNMvIBE', '24/7 Smooth Beats Radio', 'lofi']
+    ['bebuiaSKtU4', 'Chill/Study Beats Radio', 'lofi'],
+    ['KC3sfZBmn-o', 'Beats to Study/ Game/ Relax Radio', 'lofi'],
+    ['DHB42n9n6pA', 'Beats to Sleep/ Relax to Radio', 'lofi'],
+    ['g-pqmuYPHPs', 'Lofi and Jazz Hip Hop Radio', 'lofi'],
+
+    ['DSGyEsJ17cI', 'Relaxing Jazz and Bossa Nova Radio Radio', 'jazz'],
+    ['Dx5qFachd3A', "Relaxing Jazz Piano Radio", 'jazz'],
+    ['mqWdCpecKpw', 'Night of Smooth Jazz Radio', 'jazz'],
+    ['3SakCDX_fGA', 'Relaxing Jazz for Work and Study Radio', 'jazz'],
+    ['IVYOZfWF1cY', 'Morning Jazz and Bossa Nova Radio Radio', 'jazz'],
+    ['I6sj-2GRXVQ', 'Morning Coffee Jazz and Bossa Nova Radio', 'jazz']
 ]
+
+
+function initialize(){
+    //add stations from cookies to seed stations
+    readCookies()
+    //create genres array from stations
+    sortStations();
+    //user genres array to make array of genre names
+    makeGenreNamesArray();
+    // genre = genres[genreNamesArray[k]], k = 0.
+    setGenre();
+    // ${genre[i][1]}, i = 0
+    animateTitle();
+    // genreNamesArray[k] + ' ' + (i + 1) + '/' + genre.length
+    showGenre()
+}
+
+
+
 function readCookies(){
     stations = [
-        ['NsB2eya4nFA', "Night of Smooth Jazz Radio", 'jazz'],
-        ['rNg90PU7Y1s', 'Autumn Jazz Radio', 'jazz'],
-        ['2ccaHpy5Ewo', 'Relaxing Jazz and Bossa Nova Radio', 'jazz'],
-        ['zab985qDgnU', 'Relaxing Rainy Jazz Radio', 'jazz'],
-        ['oQg4VCw24Qo', 'Morning Jazz and Bossa Nova Radio', 'jazz'],
-        ['GsE5nhj-nm4', 'Morning Coffee Jazz and Bossa Nova', 'jazz'],
         ['hHW1oY26kxQ', 'Lofi Hip Hop Radio', 'lofi'],
-        ['vFtX7iqnKUk', 'Lofi Hip Hop Radio for Study', 'lofi'],
-        ['5AEbq6X33A8', '24/7 Lofi Hip Hop Radio', 'lofi'],
-        ['c_IVcbEez8o', 'Lofi Hip Hop for Sleep Radio', 'lofi'],
-        ['2L9vFNMvIBE', '24/7 Smooth Beats Radio', 'lofi']
+        ['bebuiaSKtU4', 'Chill/Study Beats Radio', 'lofi'],
+        ['KC3sfZBmn-o', 'Beats to Study/ Game/ Relax Radio', 'lofi'],
+        ['DHB42n9n6pA', 'Beats to Sleep/ Relax to Radio', 'lofi'],
+        ['g-pqmuYPHPs', 'Lofi and Jazz Hip Hop Radio', 'lofi'],
+    
+        ['DSGyEsJ17cI', 'Relaxing Jazz and Bossa Nova Radio Radio', 'jazz'],
+        ['Dx5qFachd3A', "Relaxing Jazz Piano Radio", 'jazz'],
+        ['mqWdCpecKpw', 'Night of Smooth Jazz Radio', 'jazz'],
+        ['3SakCDX_fGA', 'Relaxing Jazz for Work and Study Radio', 'jazz'],
+        ['IVYOZfWF1cY', 'Morning Jazz and Bossa Nova Radio Radio', 'jazz'],
+        ['I6sj-2GRXVQ', 'Morning Coffee Jazz and Bossa Nova Radio', 'jazz']
     ]
+    
     let cookies = Cookies.get();
     for (let cookie in cookies){
         stations.push(JSON.parse(cookies[cookie]));
     }
 }
-readCookies()
+
 function sortStations(){
     genres = {}
     for (let i = 0; i < stations.length; i++){
+        //the the genres object does not already contain an array, the key of which is the genre title at this index in the stations array, create it before pushing into it.
         if (genres[stations[i][2]] == undefined){
             genres[stations[i][2]] = [];
         }
         genres[stations[i][2]].push(stations[i])
     }
 }
-sortStations();
 
 function makeGenreNamesArray(){
     genreNamesArray = []
@@ -71,12 +93,10 @@ function makeGenreNamesArray(){
         }
     }
 }
-makeGenreNamesArray();
 
 function setGenre(){
     genre = genres[genreNamesArray[k]]
 }
-setGenre();
 
 var tag = document.createElement('script');
 
@@ -102,7 +122,7 @@ function stopVideo() {
 let options = {
     height: '0px',
     width: '0px',
-    videoId: 'NsB2eya4nFA',
+    videoId: 'hHW1oY26kxQ',
     events: {
         'onReady': onPlayerReady,
         // 'onStateChange': onPlayerStateChange
@@ -165,23 +185,21 @@ function pausePlay(){
 
 //Make buttons dissappear and reappear with mouse movement
 $(document).ready(function(){
-    hideButtons = setTimeout(function(){
-        $(".button").addClass('animated fadeOutDown');
-        $("#hamburger").addClass('animated fadeOutDown')
+    let hideButtons = setTimeout(function(){
+        $(".button").addClass('fadeOutDown');
+        hidden = true;
     }, 5000)
-    window.addEventListener('mousemove', function(){
+    $('#body').bind('mousemove mouseover mouseenter mousein', function(){
         if(hidden){
             hidden = false
-            $(".button").removeClass('animated fadeOutDown')
-            $(".button").addClass('animated fadeInUp')
-            $("#hamburger").removeClass('animated fadeOutRight')
-            $("#hamburger").addClass('animated fadeInRight')
+            $(".button").removeClass('fadeOutDown');
+            $(".button").addClass('fadeInUp');
         }
         clearTimeout(hideButtons)
         hideButtons = setTimeout(function(){
-            $(".button").addClass('animated fadeOutDown')
-            $("#hamburger").addClass('animated fadeOutRight')
-        hidden = true}, 3000)
+            $(".button").addClass('fadeOutDown');
+            hidden = true;
+        },3000)
     })
 })
 
@@ -217,7 +235,6 @@ function animateTitle(){
     },1000)
     }, 8000)
 };
-animateTitle();
 
 function changeGenre(){
     i = 0
@@ -275,7 +292,6 @@ function submitForm(){
 function showGenre(){
     document.getElementById('genreDisplay').textContent = genreNamesArray[k] + ' ' + (i + 1) + '/' + genre.length
 }
-showGenre()
 
 function removalForm(){
     document.getElementById('removalDiv').style.display = 'block';
@@ -307,3 +323,5 @@ function refresh(){
         document.getElementById('list').removeChild(stationNames[i])
     }
 }
+
+initialize();
